@@ -6,7 +6,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @SceneStorage("symbol_rendering_mode") private var renderingMode: String = "multicolor"
+    @AppStorage("symbol_rendering_mode") private var renderingMode: String = "multicolor"
     @State private var searchText: String = ""
     @State private var tappedSymbol: String?
     
@@ -27,7 +27,7 @@ struct ContentView: View {
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
         .toolbarBackground(.visible, for: .navigationBar)
         .sheet(item: $tappedSymbol) {
-            SymbolEditorView(symbolName: $0)
+            SymbolEditorView(symbolName: $0, rnMode: renderingMode)
         }
         .toolbar {
             ToolbarItem(placement: .principal) {
@@ -49,14 +49,26 @@ struct ContentView: View {
         Image("foundations-sf")
             .resizable()
             .scaledToFit()
-            .listRowInsets(.init(top: 0, leading: 0, bottom: 10, trailing: 0))
-        
-        DisclosureGroup("More Info") {
-            Text("This application gives you access to Apple’s internal system symbols. These symbols are not accessible through the public SFSymbols application nor are they permitted to be used by developers.")
-                .padding(.leading, -20)
-                .font(.callout)
-                .foregroundStyle(.secondary)
-        }.tint(.yellow).listRowSeparator(.hidden)
+            .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+            .overlay(alignment: .bottom) {
+                HStack {
+                    Text("Human Interface ")
+                        .font(.callout)
+                        .opacity(0.8)
+                    
+                    Image(systemName: "arrow.up.right")
+                        .imageScale(.small)
+                        .foregroundStyle(.secondary)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.vertical, 7.8)
+                .padding(.horizontal, 15)
+                .background(.regularMaterial)
+                .onTapGesture {
+                    let url = URL(string: "https://developer.apple.com/design/human-interface-guidelines/sf-symbols")!
+                    UIApplication.shared.open(url)
+                }
+            }
     }
     
     private func symbolRow(symbol: String) -> some View {

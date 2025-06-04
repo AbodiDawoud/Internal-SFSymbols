@@ -19,12 +19,12 @@ struct InternalSFSymbolsApp: App {
 
 
 extension String: @retroactive Identifiable {
-    // Im using this to be able to bind on strings like this case:
+    // Im doing this to be able to bind on strings like this way:
     // .sheet(item: $tappedSymbol)
     public var id: Self { self }
     
     func toRenderingMode() -> SymbolRenderingMode {
-        // We cannot bind SymbolRenderingMode to a PickerView eg($renderingMode), therefore we use this helper function.
+        // We cannot bind SymbolRenderingMode to a PickerView eg.Picker(selection: $renderingMode), therefore we use this helper method.
         return switch self.lowercased() {
         case "hierarchical": SymbolRenderingMode.hierarchical
         case "monochrome": SymbolRenderingMode.monochrome
@@ -57,7 +57,8 @@ class InternalSymbolsManager {
             with: bundle
         ).takeUnretainedValue() as! NSObject
         
-        // Store all symbols names
-        self.allImageNames = assetManager.perform(NSSelectorFromString("_allImageNames")).takeUnretainedValue() as! [String]
+        
+        let allSymbols = assetManager.perform(NSSelectorFromString("_allImageNames")).takeUnretainedValue() as! [String]
+        allImageNames = allSymbols.dropFirst().sorted() // We drops the first element because it's not valid
     }
 }

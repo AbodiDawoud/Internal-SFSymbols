@@ -4,15 +4,17 @@
     
 
 import SwiftUI
-
+ 
 
 struct SymbolEditorView: View {
     let symbolName: String
     @Environment(\.dismiss) private var dismiss
     
-    @State private var foregroundStyle: Color = .primary
-    @State private var secondryColor: Color = .blue
-    @State private var renderingMode: String = "hierarchical"
+    
+    @State private var accentColor: Color = .primary
+    @State private var secondaryColor: Color = .blue
+    
+    @State private var renderingMode: String
     @State private var symbolVariants: SymbolVariants = .none
     @State private var symbolWeight: Font.Weight = .regular
     @State private var symbolScele: Image.Scale = .medium
@@ -21,6 +23,11 @@ struct SymbolEditorView: View {
     @State private var shouldAnimateSaveAction: Bool = false
 
     
+    init(symbolName: String, rnMode: String) {
+        self.symbolName = symbolName
+        self._renderingMode = .init(initialValue: rnMode)
+    }
+
     var body: some View {
         NavigationStack {
             List {
@@ -60,10 +67,10 @@ struct SymbolEditorView: View {
                 }
                 
                 Section {
-                    ColorPicker("Accent Color", selection: $foregroundStyle)
+                    ColorPicker("Accent Color", selection: $accentColor)
                     
                     if renderingMode == "palette" {
-                        ColorPicker("Secondy Style", selection: $secondryColor)
+                        ColorPicker("Secondary Color", selection: $secondaryColor)
                     }
                     
                     Picker("Rendering Mode", selection: $renderingMode.animation()) {
@@ -72,7 +79,9 @@ struct SymbolEditorView: View {
                         Text("MultiColor").tag("multicolor")
                         Text("Palette").tag("palette")
                     }
-                    
+                }.frame(maxHeight: 33)
+                
+                Section {
                     Picker("Symbol Variants", selection: $symbolVariants.animation()) {
                         Text("None").tag(SymbolVariants.none)
                         Text("Fill").tag(SymbolVariants.fill)
@@ -124,7 +133,7 @@ struct SymbolEditorView: View {
                 .frame(width: 55, height: 55)
                 .symbolRenderingMode(renderingMode.toRenderingMode())
                 .symbolVariant(symbolVariants)
-                .foregroundStyle(foregroundStyle, secondryColor)
+                .foregroundStyle(accentColor, secondaryColor)
                 .fontWeight(symbolWeight)
                 .imageScale(symbolScele)
                 .padding(25)
@@ -149,7 +158,7 @@ struct SymbolEditorView: View {
             .symbolVariant(symbolVariants)
             .fontWeight(symbolWeight)
             .imageScale(symbolScele)
-            .foregroundStyle(foregroundStyle, secondryColor)
+            .foregroundStyle(accentColor, secondaryColor)
     }
     
     func copySymbolName() {
