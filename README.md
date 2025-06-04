@@ -6,6 +6,9 @@
 [![swift-version](https://img.shields.io/badge/swift-5-orange.svg)](https://github.com/apple/swift)
 [![license](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE)
 
+This application gives you access to Apple’s internal system symbols. These symbols are not accessible through the public SFSymbols application nor are they permitted to be used by developers.
+
+⚠️ Run it on your physical device to see all symbols
 
 ## Features
 
@@ -16,6 +19,5 @@
 
 ## Screenshots
 
-<img src="https://github.com/user-attachments/assets/46968d25-ea58-4d7f-9691-2b633eed8486" height="300">
-<img src="https://github.com/user-attachments/assets/3fd799ef-1dc2-4448-bfa6-6a575a81fe35" height="300">
-<img src="https://github.com/user-attachments/assets/94f09d3e-5d51-4a6b-a360-a6cbe52d99a1" height="300">
+<img src="https://github.com/user-attachments/assets/e825f4ad-3ce4-4dd0-b3ef-13f25ae5709d" height="300">
+<img src="https://github.com/user-attachments/assets/2be10859-b9a8-472e-8e73-5e5f7590c43a" height="300">
