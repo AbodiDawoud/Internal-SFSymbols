@@ -7,18 +7,30 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD35C2102E12047400A1DEAF /* SymbolsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD35C20F2E12047400A1DEAF /* SymbolsManager.swift */; };
+		BD35C2132E1204B600A1DEAF /* BookmarkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD35C2122E1204B600A1DEAF /* BookmarkManager.swift */; };
+		BD35C2172E12051700A1DEAF /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD35C2162E12051700A1DEAF /* String+.swift */; };
+		BD35C2192E1241DD00A1DEAF /* SymbolEditorActionBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD35C2182E1241DD00A1DEAF /* SymbolEditorActionBar.swift */; };
+		BD476E142E148E7600ACF1E3 /* BookmarksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD476E132E148E7600ACF1E3 /* BookmarksView.swift */; };
+		BD49698F2E13745800E1E1B4 /* BookmarkCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD49698E2E13745800E1E1B4 /* BookmarkCardView.swift */; };
 		C083E5BE2D62789D00E5DA42 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = C083E5BD2D62789D00E5DA42 /* App.swift */; };
 		C083E5C02D62789D00E5DA42 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C083E5BF2D62789D00E5DA42 /* ContentView.swift */; };
 		C083E5C22D62789E00E5DA42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C083E5C12D62789E00E5DA42 /* Assets.xcassets */; };
-		C083E5EA2D62889000E5DA42 /* SymbolEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C083E5E92D62889000E5DA42 /* SymbolEditorView.swift */; };
+		C083E5EA2D62889000E5DA42 /* SymbolEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C083E5E92D62889000E5DA42 /* SymbolEditor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BD35C20F2E12047400A1DEAF /* SymbolsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolsManager.swift; sourceTree = "<group>"; };
+		BD35C2122E1204B600A1DEAF /* BookmarkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkManager.swift; sourceTree = "<group>"; };
+		BD35C2162E12051700A1DEAF /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		BD35C2182E1241DD00A1DEAF /* SymbolEditorActionBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolEditorActionBar.swift; sourceTree = "<group>"; };
+		BD476E132E148E7600ACF1E3 /* BookmarksView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarksView.swift; sourceTree = "<group>"; };
+		BD49698E2E13745800E1E1B4 /* BookmarkCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkCardView.swift; sourceTree = "<group>"; };
 		C083E5BA2D62789D00E5DA42 /* InternalSFSymbols.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = InternalSFSymbols.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C083E5BD2D62789D00E5DA42 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		C083E5BF2D62789D00E5DA42 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C083E5C12D62789E00E5DA42 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		C083E5E92D62889000E5DA42 /* SymbolEditorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolEditorView.swift; sourceTree = "<group>"; };
+		C083E5E92D62889000E5DA42 /* SymbolEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolEditor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +44,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BD35C2112E12049D00A1DEAF /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				BD35C20F2E12047400A1DEAF /* SymbolsManager.swift */,
+				BD35C2122E1204B600A1DEAF /* BookmarkManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		BD35C2142E1204C100A1DEAF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C083E5C12D62789E00E5DA42 /* Assets.xcassets */,
+				BD35C2162E12051700A1DEAF /* String+.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		BD35C2152E1204CB00A1DEAF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C083E5BF2D62789D00E5DA42 /* ContentView.swift */,
+				C083E5E92D62889000E5DA42 /* SymbolEditor.swift */,
+				BD35C2182E1241DD00A1DEAF /* SymbolEditorActionBar.swift */,
+				BD476E132E148E7600ACF1E3 /* BookmarksView.swift */,
+				BD49698E2E13745800E1E1B4 /* BookmarkCardView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		C083E5B12D62789D00E5DA42 = {
 			isa = PBXGroup;
 			children = (
@@ -51,9 +93,9 @@
 		C083E5BC2D62789D00E5DA42 /* InternalSFSymbols */ = {
 			isa = PBXGroup;
 			children = (
-				C083E5C12D62789E00E5DA42 /* Assets.xcassets */,
-				C083E5E92D62889000E5DA42 /* SymbolEditorView.swift */,
-				C083E5BF2D62789D00E5DA42 /* ContentView.swift */,
+				BD35C2142E1204C100A1DEAF /* Resources */,
+				BD35C2112E12049D00A1DEAF /* Services */,
+				BD35C2152E1204CB00A1DEAF /* Views */,
 				C083E5BD2D62789D00E5DA42 /* App.swift */,
 			);
 			path = InternalSFSymbols;
@@ -129,8 +171,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				C083E5C02D62789D00E5DA42 /* ContentView.swift in Sources */,
+				BD49698F2E13745800E1E1B4 /* BookmarkCardView.swift in Sources */,
 				C083E5BE2D62789D00E5DA42 /* App.swift in Sources */,
-				C083E5EA2D62889000E5DA42 /* SymbolEditorView.swift in Sources */,
+				BD35C2132E1204B600A1DEAF /* BookmarkManager.swift in Sources */,
+				BD476E142E148E7600ACF1E3 /* BookmarksView.swift in Sources */,
+				BD35C2192E1241DD00A1DEAF /* SymbolEditorActionBar.swift in Sources */,
+				C083E5EA2D62889000E5DA42 /* SymbolEditor.swift in Sources */,
+				BD35C2172E12051700A1DEAF /* String+.swift in Sources */,
+				BD35C2102E12047400A1DEAF /* SymbolsManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,7 +317,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "SFSymbols+";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = AllowIT;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = " ";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -306,7 +354,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "SFSymbols+";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
-				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = AllowIT;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = " ";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
