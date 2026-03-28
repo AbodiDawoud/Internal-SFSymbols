@@ -21,9 +21,11 @@ struct SymbolEditorActionBar: View {
         Section {
             HStack {
                 Spacer()
-                Button("", systemImage: shouldAnimateCopyAction ? "checkmark" : "doc.on.doc", action: copySymbolName)
+                Button("", systemImage: shouldAnimateCopyAction ? "checkmark" : "square.on.square", action: copySymbolName)
                     .foregroundStyle(shouldAnimateCopyAction ? .green : .primary)
                     .animation(.linear, value: shouldAnimateCopyAction)
+                    .frame(width: 30)
+                    .contentTransition(.symbolEffect)
                 Spacer()
                 
                 Divider()
@@ -32,6 +34,8 @@ struct SymbolEditorActionBar: View {
                 Button("", systemImage: shouldAnimateSaveAction ? "checkmark" : "tray.and.arrow.down", action: saveSymbolToPhotoLibrary)
                     .foregroundStyle(shouldAnimateSaveAction ? .green : .primary)
                     .animation(.linear, value: shouldAnimateSaveAction)
+                    .frame(width: 30)
+                    .contentTransition(.symbolEffect)
                 Spacer()
                 Divider()
                 

@@ -20,12 +20,6 @@ struct InternalSFSymbolsApp: App {
 }
 
 
-extension View {
-    func backport<V:View>(@ViewBuilder _ closure: (Self) -> V) -> some View {
-        closure(self)
-    }
-}
-
 class AppDelegate: NSObject, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         print(">>> AppDelegate: applicationWillTerminate")

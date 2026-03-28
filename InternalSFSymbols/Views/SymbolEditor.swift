@@ -1,29 +1,32 @@
 //
 //  SymbolEditorView.swift
 //  InternalSFSymbols
-    
+//
 
 import SwiftUI
- 
+import UIKit
 
 struct SymbolEditorView: View {
     let symbolName: String
-    @Environment(\.dismiss) private var dismiss
+    let showsCodeLineNumbers: Bool
     
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.colorScheme) private var scheme
+    @EnvironmentObject private var bookmarks: Bookmarks
     
     @State private var accentColor: Color = .primary
     @State private var secondaryColor: Color = .blue
-    
     @State private var symbolVariant: SymbolVariants = .none
     @State private var symbolWeight: Font.Weight = .regular
     @State private var symbolScele: Image.Scale = .medium
+    @State private var usesDefaultAccentColor: Bool = true
+    @State private var usesDefaultSecondaryColor: Bool = true
     
-    @EnvironmentObject private var bookmarks: Bookmarks
-    @AppStorage("symbol_rendering_mode") private var renderingMode: String!
+    @AppStorage("symbol_rendering_mode") private var renderingMode: String = "monochrome"
 
-
-    init(symbolName: String) {
+    init(symbolName: String, showsCodeLineNumbers: Bool = true) {
         self.symbolName = symbolName
+        self.showsCodeLineNumbers = showsCodeLineNumbers
     }
  
     var body: some View {
@@ -46,12 +49,13 @@ struct SymbolEditorView: View {
                         Text("Palette").tag("palette")
                     }
                     
-                    ColorPicker("Accent Color", selection: $accentColor)
+                    ColorPicker("Accent Color", selection: accentColorBinding)
                     
                     if renderingMode == "palette" {
-                        ColorPicker("Secondary Color", selection: $secondaryColor)
+                        ColorPicker("Secondary Color", selection: secondaryColorBinding)
                     }
-                }.frame(maxHeight: 33)
+                }
+                .frame(maxHeight: 33)
                 
                 Section {
                     Picker("Variants", selection: $symbolVariant.animation()) {
@@ -61,13 +65,13 @@ struct SymbolEditorView: View {
                         Text("Rectangle").tag(SymbolVariants.rectangle)
                         Text("Slash").tag(SymbolVariants.slash)
                         Text("Square").tag(SymbolVariants.square)
-                    }   
+                    }
                     
                     Picker("Scale", selection: $symbolScele.animation()) {
                         Text("Small").tag(Image.Scale.small)
                         Text("Medium").tag(Image.Scale.medium)
                         Text("Large").tag(Image.Scale.large)
-                    } 
+                    }
                     
                     Picker("Weight", selection: $symbolWeight.animation()) {
                         Text("Black").tag(Font.Weight.black)
@@ -80,7 +84,24 @@ struct SymbolEditorView: View {
                         Text("Thin").tag(Font.Weight.thin)
                         Text("UltraLight").tag(Font.Weight.ultraLight)
                     }
-                }.frame(maxHeight: 33)
+                }
+                
+                Section {
+                    SymbolCodePreview(
+                        symbolName: symbolName,
+                        renderingMode: renderingMode,
+                        symbolVariant: symbolVariant,
+                        symbolWeight: symbolWeight,
+                        symbolScale: symbolScele,
+                        accentColor: accentColor,
+                        secondaryColor: secondaryColor,
+                        usesDefaultAccentColor: usesDefaultAccentColor,
+                        usesDefaultSecondaryColor: usesDefaultSecondaryColor,
+                        showsLineNumbers: showsCodeLineNumbers
+                    )
+                }
+                .listRowBackground(Color.clear)
+                .listRowInsets(EdgeInsets())
             }
             .navigationTitle("Symbol Editor")
             .navigationBarTitleDisplayMode(.inline)
@@ -98,21 +119,19 @@ struct SymbolEditorView: View {
                 ToolbarItem(placement: .topBarLeading) {
                     Button {
                         bookmarks.toggleBookmark(for: symbolName)
+                        UIImpactFeedbackGenerator(style: .soft).impactOccurred()
                     } label: {
                         Image(systemName: bookmarks.isBookmarked(symbolName) ? "bookmark.fill" : "bookmark")
                             .foregroundStyle(.orange)
                             .font(.footnote.weight(.medium))
                             .padding(7)
-                            .background(Color.gray.opacity(0.2), in: .circle)
+                            .background(Color(white: scheme == .light ? 0.94 : 0.2), in: .circle)
                             .animation(.smooth, value: bookmarks.isBookmarked(symbolName))
-                            .backport {
-                                if #available(iOS 17.0, *) {
-                                    $0.contentTransition(.symbolEffect(.replace.upUp, options: .default))
-                                }
-                            }
+                            .contentTransition(.symbolEffect(.replace.upUp, options: .default))
                     }
                 }
             }
+            .persistentSystemOverlays(.hidden)
         }
     }
 
@@ -139,7 +158,6 @@ struct SymbolEditorView: View {
         .listRowBackground(Color.clear)
     }
 
-    
     // This is the saveable and shareable symbol version.
     // We cant use "symbolPreview" view because it contains some unnecessary text and modifiers.
     var symbolContent: some View {
@@ -152,6 +170,26 @@ struct SymbolEditorView: View {
             .fontWeight(symbolWeight)
             .imageScale(symbolScele)
             .foregroundStyle(accentColor, secondaryColor)
+    }
+    
+    private var accentColorBinding: Binding<Color> {
+        Binding(
+            get: { accentColor },
+            set: { newValue in
+                accentColor = newValue
+                usesDefaultAccentColor = false
+            }
+        )
+    }
+    
+    private var secondaryColorBinding: Binding<Color> {
+        Binding(
+            get: { secondaryColor },
+            set: { newValue in
+                secondaryColor = newValue
+                usesDefaultSecondaryColor = false
+            }
+        )
     }
 
     func setNavigationAppearance() {
