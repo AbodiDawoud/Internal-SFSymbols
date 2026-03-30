@@ -7,7 +7,7 @@
 [![](https://raw.githubusercontent.com/pachadotdev/buymeacoffee-badges/main/bmc-white.svg)](https://buymeacoffee.com/abodi)
 
 <div>
-  <img src="https://img.shields.io/badge/Platform-iOS_18+-000000?style=flat&logo=apple&logoColor=white" />
+  <img src="https://img.shields.io/badge/Platform-iOS_17+-000000?style=flat&logo=apple&logoColor=white" />
   <img src="https://img.shields.io/badge/Swift-5-F05138?style=flat&logo=swift&logoColor=white" />
   <img src="https://img.shields.io/badge/License-MIT-blue.svg?style=flat" />
 </div>
