@@ -77,13 +77,12 @@ struct ContentView: View {
         .preferredColorScheme(color_scheme.toColorScheme())
         .navigationBarTitleDisplayMode(.inline)
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
-        .toolbarBackground(.visible, for: .navigationBar)
         .sheet(item: $tappedSymbol) {
             SymbolEditorView(symbolName: $0)
         }
-        .onChange(of: bookmarksManager.bookmarks, perform: { _ in
+        .onChange(of: bookmarksManager.bookmarks) { _, _ in
             bookmarksRefreshID = UUID()
-        })
+        }
     }
     
     var filtreredSymbols: [String] {

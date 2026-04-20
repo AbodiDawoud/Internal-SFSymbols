@@ -103,6 +103,7 @@ struct SymbolEditorView: View {
                 .listRowBackground(Color.clear)
                 .listRowInsets(EdgeInsets())
             }
+            .scrollIndicators(.hidden)
             .navigationTitle("Symbol Editor")
             .navigationBarTitleDisplayMode(.inline)
             .onAppear(perform: setNavigationAppearance)
@@ -123,10 +124,7 @@ struct SymbolEditorView: View {
                     } label: {
                         Image(systemName: bookmarks.isBookmarked(symbolName) ? "bookmark.fill" : "bookmark")
                             .foregroundStyle(.orange)
-                            .font(.footnote.weight(.medium))
-                            .padding(7)
-                            .background(Color(white: scheme == .light ? 0.94 : 0.2), in: .circle)
-                            .animation(.smooth, value: bookmarks.isBookmarked(symbolName))
+                            .font(.subheadline.weight(.medium))
                             .contentTransition(.symbolEffect(.replace.upUp, options: .default))
                     }
                 }

@@ -22,27 +22,22 @@ struct SymbolCodePreview: View {
 
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack(spacing: 8) {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                Text("Code Preview")
+                    .font(.callout)
+                Spacer()
                 Button(action: copyCodePreview) {
                     Image(systemName: animateCopyAction ? "checkmark" : "square.on.square")
                         .font(.caption.weight(.semibold))
                         .symbolRenderingMode(.hierarchical)
                         .frame(width: 20)
+                        .transition(.blurReplace)
+                        .animation(.smooth, value: animateCopyAction)
                 }
                 .buttonStyle(.plain)
-                .foregroundStyle(animateCopyAction ? .green : .primary)
-                .animation(.linear, value: animateCopyAction)
-                .contentTransition(.symbolEffect)
-                .padding(.leading, 7)
-                
-                Divider().frame(height: 12)
-                
-                Text("Code Preview")
-                    .font(.callout.weight(.medium))
-                
-                Spacer()
             }
+            .padding(.horizontal, 13)
             
             ScrollView(.horizontal, showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 5) {

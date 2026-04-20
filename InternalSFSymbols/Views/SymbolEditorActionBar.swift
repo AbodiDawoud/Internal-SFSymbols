@@ -4,6 +4,8 @@
     
 
 import SwiftUI
+import Photos
+
 
 struct SymbolEditorActionBar: View {
     let symbolName: String
@@ -21,7 +23,7 @@ struct SymbolEditorActionBar: View {
         Section {
             HStack {
                 Spacer()
-                Button("", systemImage: shouldAnimateCopyAction ? "checkmark" : "square.on.square", action: copySymbolName)
+                Button("", systemImage: shouldAnimateCopyAction ? "checkmark" : "square.on.square.dashed", action: copySymbolName)
                     .foregroundStyle(shouldAnimateCopyAction ? .green : .primary)
                     .animation(.linear, value: shouldAnimateCopyAction)
                     .frame(width: 30)
@@ -32,7 +34,6 @@ struct SymbolEditorActionBar: View {
                 Spacer()
                 
                 Button("", systemImage: shouldAnimateSaveAction ? "checkmark" : "tray.and.arrow.down", action: saveSymbolToPhotoLibrary)
-                    .foregroundStyle(shouldAnimateSaveAction ? .green : .primary)
                     .animation(.linear, value: shouldAnimateSaveAction)
                     .frame(width: 30)
                     .contentTransition(.symbolEffect)
@@ -69,15 +70,22 @@ struct SymbolEditorActionBar: View {
     func saveSymbolToPhotoLibrary() {
         if shouldAnimateSaveAction == true { return }
         
-        // Im unwrapping it because im 99% sure it returns a valid image.
-        let imageToSave = ImageRenderer(content: symbolContent).uiImage!
-        
-        UIImageWriteToSavedPhotosAlbum(imageToSave, nil, nil, nil)
+        let symbolURL = symbolToTemporaryURL()
+
+        PHPhotoLibrary.shared().performChanges {
+            let request = PHAssetCreationRequest.forAsset()
+            request.addResource(with: .photo, fileURL: symbolURL, options: nil)
+        } completionHandler: { success, _ in
+            if success {
+                cleanupTemporaryFiles()
+            }
+        }
+
         UIImpactFeedbackGenerator(style: .rigid).impactOccurred()
         
-        shouldAnimateSaveAction.toggle()
-        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
-            shouldAnimateSaveAction.toggle()
+        shouldAnimateSaveAction = true
+        Timer.scheduledTimer(withTimeInterval: 1.5, repeats: false) { _ in
+            shouldAnimateSaveAction = false
         }
     }
     
@@ -88,5 +96,19 @@ struct SymbolEditorActionBar: View {
         let tempURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(symbolName).png")
         try? data.write(to: tempURL)
         return tempURL
+    }
+    
+    func cleanupTemporaryFiles() {
+        let location = URL(fileURLWithPath: NSTemporaryDirectory())
+
+        do {
+            let content = try FileManager.default.contentsOfDirectory(at: location, includingPropertiesForKeys: nil)
+            
+            try content.forEach { fileURL in
+                try FileManager.default.removeItem(at: fileURL)
+            }
+        } catch {
+            print("Clean up failed: \(error)")
+        }
     }
 }
