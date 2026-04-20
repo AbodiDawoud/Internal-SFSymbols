@@ -1,5 +1,5 @@
 <p align="center">
-  <img width=255 height=255 src="https://github.com/user-attachments/assets/c9a204b5-f259-4d37-a2a6-3552a3abe0cf" alt="app icon" title="sfsymbols">
+  <img width=215 height=215 src="https://github.com/user-attachments/assets/c9a204b5-f259-4d37-a2a6-3552a3abe0cf" alt="app icon" title="sfsymbols">
 </p>
 
 
@@ -26,6 +26,5 @@ This application gives you access to Apple’s internal system symbols. These sy
 
 ## Screenshots
 
-<img src="https://github.com/user-attachments/assets/1881b236-d73c-4473-b5d2-14bd5ed8a008" height="300">
-<img src="https://github.com/user-attachments/assets/15e67197-0034-43b2-8c59-2f6939790698" height="300">
-<img src="https://github.com/user-attachments/assets/cc412ce0-3375-48dc-aa3f-6a71e637b177" height="300">
+<img height="340" alt="HomeView" src="https://github.com/user-attachments/assets/f6a2d660-a9f9-4468-8216-9d446956bc80" />
+<img height="340" alt="SymbolEditor" src="https://github.com/user-attachments/assets/8bdbb474-6fc4-497d-81ef-4baeb5ed0c59" />
